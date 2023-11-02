@@ -1,11 +1,5 @@
 {
-  "routes": [
-    { "src": "/", "dest": "/index.html" },
-    { "src": "/about", "dest": "/about.html" },
-    { "src": "/manga", "dest": "/manga.html" },
-    { "src": "/movie", "dest": "/movie.html" },
-    { "src": "/details/:id", "dest": "/details.html" },
-    { "src": "/searchByGenre", "dest": "/searchByGenre.html" },
-    { "src": "/static/(.*)", "dest": "/static/$1" }
+  "rewrites": [
+    {"source": "/(.*)", "destination":"/"}
   ]
 }
