@@ -8,7 +8,7 @@ const index = ({mangas} : {mangas: InterTableManga[]}) => {
       .replace(/[^a-zA-Z0-9 ]/g, "")
       .replace(/\s+/g, "-")
       .toLocaleLowerCase();
-      window.location.href=`${url}/${nameAnime}`
+      window.open(`${url}/${nameAnime}`,'_blank')
 
   }
   return (

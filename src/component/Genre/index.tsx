@@ -3,9 +3,12 @@ import { FetchGenre } from "../../fetch/FetchDataAnime";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "../../../node_modules/swiper/swiper-bundle.min.css";
 import { interGenre } from "../interface/InterHome";
+import { Link } from "react-router-dom";
+import { LoadingScreen } from "..";
 
 const Index = () => {
   const [genre, setGenre] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
 
   const getGenre = async () => {
     try {
@@ -17,10 +20,12 @@ const Index = () => {
   };
   useEffect(() => {
     getGenre();
+    setIsLoading(false)
   }, []);
 
   return (
     <div className="my-14 w-full">
+      {isLoading && <LoadingScreen />}
       <div className="w-[90%] mx-auto">
         <h1 className="text-4xl text-white font-bold mb-4">Genre</h1>
 
@@ -55,12 +60,12 @@ const Index = () => {
         >
           {genre.map((item: interGenre) => (
             <SwiperSlide key={item.mal_id} className="flex w-fit m-0 justify-center items-center">
-              <a
-                href={`/searchByGenre?genre=${item.name}&type=${item.mal_id}`}
+              <Link
+                to={`/searchByGenre?genre=${item.name}&type=${item.mal_id}`}
                 className="hover:font-semibold relative text-white py-2 mb-16 px-5 border-2 text-center border-slate-100 after:content-[''] hover:text-slate-800 after:h-0 after:block after:left-0 after:bottom-0 overflow-hidden hover:after:h-full after:absolute after:w-full after:bg-yellow-300 after:duration-300 after:ease-in-out after:-z-10"
               >
                 {item.name}
-              </a>
+              </Link>
             </SwiperSlide>
           ))}
         </Swiper>

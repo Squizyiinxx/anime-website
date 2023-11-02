@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
-import { Episode, SliderCoverflow, SlinderRecomend, Star } from "../component";
+import { Episode, LoadingScreen, SliderCoverflow, SlinderRecomend, Star } from "../component";
 import { FetchRecomend } from "../fetch/FetchDataAnime";
 import { useState, useEffect } from "react";
 import { getDetailsAnime } from "../fetch/fetchDetail";
+
+
 
 interface InterDetails {
   synopsis: string;
@@ -41,7 +43,7 @@ function getVideoId(url: string) {
 
 const DetailsAnime = () => {
   const { id } = useParams();
-
+  const [isLoading, setIsLoading] = useState(true)
   const [animeRecomend, setAnimeRecomend] = useState([]);
   const [details, setDetails] = useState<InterDetails>({
     synopsis: "",
@@ -62,12 +64,15 @@ const DetailsAnime = () => {
   });
 
   useEffect(() => {
-    FetchRecomend()
-      .then((res) => setAnimeRecomend(res.data))
+    Promise.all([FetchRecomend(), getDetailsAnime(id)])
+      .then(([recomendRes, detailsRes]) => {
+        setAnimeRecomend(recomendRes.data);
+        setDetails(detailsRes.data);
+      })
       .catch((err) => console.log(err));
-    getDetailsAnime(id)
-      .then((res) => setDetails(res.data))
-      .catch((err) => console.log(err));
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 4000);
   }, [id]);
   return (
     <>
@@ -76,6 +81,7 @@ const DetailsAnime = () => {
     after:content-[''] after:block after:w-full after:h-full after:absolute after:bottom-0 after:left-0 after:bg-gradient-to-b after:from-transparent after:to-slate-800 after:z-10
     "
       >
+        {isLoading && <LoadingScreen />}
         {details.trailer.embed_url !== null && (
           <iframe src={`${details.trailer.embed_url}&playlist=${getVideoId(details?.trailer?.embed_url)}&loop=1&controls=0&mute=1&showinfo=0&subitile=0`} className="w-full h-full  md:h-screen absolute left-0 top-0" allowFullScreen></iframe>
         )}

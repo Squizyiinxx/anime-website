@@ -7,7 +7,7 @@ import { faArrowLeft, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
 const SearchByGenre = () => {
   const [genreSearch, setGenreSearch] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [page, setPage] = useState(1);
   const [dataAnime, setDataAnime] = useState([]);
   const location = useLocation();
@@ -27,6 +27,10 @@ const SearchByGenre = () => {
         }
       })
       .catch((err) => console.log(err));
+
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 4000);
   }, [type, page]);
 
   const handlePage = (y: string) => {

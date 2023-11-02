@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { getManga, searchManga } from "../fetch/FetchManga";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { Slider, Table } from "../component";
+import { LoadingScreen, Slider, Table } from "../component";
 
 const Manga = () => {
+  const [isLoading, setIsLoading] = useState(true)
   const [mangaslider, setMangaslider] = useState([]);
   const [mangas, setMangas] = useState([]);
   const [query, setQuery] = useState('')
@@ -13,6 +14,9 @@ const Manga = () => {
     getManga("publishing")
       .then((res) => setMangaslider(res.data))
       .catch((err) => console.error(err));
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 4000);
   }
 
   useEffect(() => {
@@ -28,6 +32,7 @@ const Manga = () => {
 
   return (
     <div className="w-full py-20 bg-slate-800">
+      {isLoading && <LoadingScreen />}
     <Slider mangaslider={mangaslider} type="manga"/>
       <div className="flex gap-5 px-5 md:px-0 w-[100%] md:w-[90%] xl:w-[80%] mt-32 justify-end mx-auto">
         <button type="submit" onClick={() => handleSearch()} 

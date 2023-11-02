@@ -2,10 +2,20 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import img from '../assets/about.png'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
+import {useEffect, useState} from 'react'
+import { LoadingScreen } from '../component';
 const About = () => {
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(()=>{
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 4000)
+  })
     
   return (
     <div className="flex bg-slate-800 -z-[2] flex-col overflow-hidden w-full">
+      {isLoading && <LoadingScreen />}
       <div className="flex justify-center w-full z-[1] overflow-hidden items-center relative h-[300px] bg-slate-800 md:h-[500px] lg:h-screen before:content-[''] before:block before:w-full before:h-[200px] before:absolute before:z-[2] before:bottom-0 before:left-0 before:bg-slate-800 before:rounded-t-[80%] ">
         <img src={img} alt="hero" className="w-full absolute left-0 top-0  opacity-50" />
         <h1 className="text-2xl font-agbal lg:text-6xl font-bold text-white z-[3]">About</h1>

@@ -12,7 +12,7 @@ const Card = ({ title, image, score, mal_id,type} : InterAnime) => {
       .replace(/\s+/g, "-")
       .toLocaleLowerCase()
     if(type === 'manga'){
-      window.location.href=`${url}/${nameAnime}`
+      window.open(`${url}/${nameAnime}`,"_blank")
     }else{
       navigate(`/details/${mal_id}`)
     }

@@ -14,10 +14,10 @@ const cekUrl = (nameAnime: string, mal_id : number) => {
   }).then((result) => {
     if (result.isConfirmed) {
       const animeIndo = `https://www.animeindo.stream/anime/${nameAnime}`;
-      window.location.href = animeIndo;
+      window.open(animeIndo,'_blank');
     } else if (result.isDenied) {
       const animeIndo = `https://myanimelist.net/anime/${mal_id}`;
-      window.location.href = animeIndo;
+      window.open(animeIndo,'_blank');
     }
   });
 };
