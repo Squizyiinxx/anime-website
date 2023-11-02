@@ -1,0 +1,18 @@
+{
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/static/(.*)", "destination": "/static/$1" },
+    { "src": "/img/(.*)", "destination": "/img/$1" },
+    { "src": "/media/(.*)", "destination": "/media/$1" },
+    { "src": "/css/(.*)", "destination": "/css/$1" },
+    { "src": "/js/(.*)", "destination": "/js/$1" },
+    { "src": "/(favicon.ico|robots.txt)", "destination": "/$1" },
+    { "src": "/loading", "destination": "/loading.html" },
+    { "src": "/about", "destination": "/about.html" },
+    { "src": "/manga", "destination": "/manga.html" },
+    { "src": "/movie", "destination": "/movie.html" },
+    { "src": "/details/:id", "destination": "/details.html" },
+    { "src": "/searchByGenre", "destination": "/searchByGenre.html" },
+    { "src": "/*", "destination": "/index.html" }
+  ]
+}
