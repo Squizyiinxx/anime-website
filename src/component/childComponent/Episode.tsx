@@ -1,6 +1,6 @@
 import cekUrl from "./CekUrl";
 const Episode = ({ episodes, title,mal_id }: { episodes: number; title: string, mal_id:number }) => {
-  const nameAnime = title.replace(/[^a-zA-Z0-9 ]/g, '').replace(/\s+/g, '-').toLocaleLowerCase();
+  const nameAnime = title.replace(/[^a-zA-Z0-9 -]/g, '').replace(/\s+/g, '-').toLocaleLowerCase();
 
   const loopEpisode = (episodes: number) => {
     const episode = [];
